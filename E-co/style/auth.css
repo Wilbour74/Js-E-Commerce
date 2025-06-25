@@ -1,0 +1,107 @@
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: linear-gradient(135deg, #ece9e6 0%, #ffffff 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    color: #222;
+}
+
+main {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    padding: 2.5rem 2rem;
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+    margin-top: 2vh;
+}
+
+header h1 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    letter-spacing: 1px;
+    color: #007bff;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    width: 100%;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.3rem;
+}
+
+label {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #333;
+}
+
+input {
+    width: 100%;
+    padding: 0.7rem 0.9rem;
+    border: 1.5px solid #ccc;
+    border-radius: 7px;
+    font-size: 1rem;
+    transition: border 0.2s, box-shadow 0.2s;
+    outline: none;
+    background: #f9f9f9;
+}
+
+input:focus {
+    border: 1.5px solid #007bff;
+    box-shadow: 0 0 0 2px #80bdff44;
+    background: #fff;
+}
+
+button {
+    background-color: #007bff;
+    color: white;
+    padding: 0.9rem 0;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, box-shadow 0.2s, outline 0.2s;
+    box-shadow: 0 2px 8px rgba(0,123,255,0.08);
+    outline: none;
+}
+
+button:hover,
+button:focus {
+    background: #0056b3;
+    box-shadow: 0 4px 16px rgba(0,86,179,0.12);
+    outline: 3px solid #80bdff;
+    outline-offset: 2px;
+}
+
+@media (max-width: 500px) {
+    main {
+        padding: 1.2rem 0.5rem;
+        max-width: 98vw;
+    }
+    header h1 {
+        font-size: 1.3rem;
+    }
+    button {
+        font-size: 1rem;
+        padding: 0.7rem 0;
+    }
+}
+
+.auth-panel form {
+    margin: 0 auto;
+    max-width: 350px;
+    width: 100%;
+}

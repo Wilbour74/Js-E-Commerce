@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accueil - E-Commerce</title>
+    <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="style/auth.css">
+</head>
+<body>
+    <main>
+        <header>
+            <h1>E-Commerce</h1>
+        </header>
+        <div class="auth-tabs" role="tablist" aria-label="Choix du formulaire">
+            <button id="tab-login" class="tab active" role="tab" aria-selected="true" aria-controls="login-panel">Connexion</button>
+            <button id="tab-register" class="tab" role="tab" aria-selected="false" aria-controls="register-panel">Inscription</button>
+        </div>
+        <section id="login-panel" class="auth-panel" role="tabpanel" aria-labelledby="tab-login">
+            <form id="loginForm" aria-label="Formulaire de connexion" autocomplete="on">
+                <div class="form-group">
+                    <label for="login-email">Adresse email</label>
+                    <input type="email" id="login-email" name="email" placeholder="exemple@mail.com" required autocomplete="email" />
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Mot de passe</label>
+                    <input type="password" id="login-password" name="password" placeholder="Mot de passe" required autocomplete="current-password" />
+                </div>
+                <button type="submit">Se connecter</button>
+            </form>
+        </section>
+        <section id="register-panel" class="auth-panel" role="tabpanel" aria-labelledby="tab-register" hidden>
+            <form id="registerForm" aria-label="Formulaire d'inscription" autocomplete="on">
+                <div class="form-group">
+                    <label for="register-name">Nom</label>
+                    <input type="text" id="register-name" name="name" placeholder="Votre nom" required autocomplete="name">
+                </div>
+                <div class="form-group">
+                    <label for="register-pseudo">Pseudo</label>
+                    <input type="text" id="register-pseudo" name="pseudo" placeholder="Votre pseudo" required autocomplete="username">
+                </div>
+                <div class="form-group">
+                    <label for="register-email">Adresse email</label>
+                    <input type="email" id="register-email" name="email" placeholder="exemple@mail.com" required autocomplete="email">
+                </div>
+                <div class="form-group">
+                    <label for="register-password">Mot de passe</label>
+                    <input type="password" id="register-password" name="password" placeholder="Mot de passe" required autocomplete="new-password">
+                </div>
+                <button type="submit">S'inscrire</button>
+            </form>
+        </section>
+    </main>
+    <script type="module" src="Scripts/auth.js"></script>
+</body>
+</html>

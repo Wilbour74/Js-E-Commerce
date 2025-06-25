@@ -1,0 +1,112 @@
+body {
+    background: linear-gradient(135deg, #ece9e6 0%, #ffffff 100%);
+    min-height: 100vh;
+    margin: 0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    color: #222;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+main {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    padding: 2.5rem 2rem;
+    max-width: 350px;
+    width: 100%;
+    text-align: center;
+}
+
+h1 {
+    font-size: 2.2rem;
+    margin-bottom: 2rem;
+    letter-spacing: 1px;
+}
+
+.button-group {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.button-group a[role="button"] {
+    display: block;
+    padding: 0.9rem 0;
+    border-radius: 8px;
+    background: #007bff;
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(0,123,255,0.08);
+    transition: background 0.2s, box-shadow 0.2s, outline 0.2s;
+    outline: none;
+    border: none;
+    cursor: pointer;
+}
+
+.button-group a[role="button"]:hover,
+.button-group a[role="button"]:focus {
+    background: #0056b3;
+    box-shadow: 0 4px 16px rgba(0,86,179,0.12);
+    outline: 3px solid #80bdff;
+    outline-offset: 2px;
+}
+
+@media (max-width: 500px) {
+    main {
+        padding: 1.2rem 0.5rem;
+        max-width: 98vw;
+    }
+    h1 {
+        font-size: 1.4rem;
+    }
+    .button-group a[role="button"] {
+        font-size: 1rem;
+        padding: 0.7rem 0;
+    }
+}
+
+.auth-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.tab {
+    background: none;
+    border: none;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #007bff;
+    padding: 0.7rem 1.5rem;
+    border-radius: 8px 8px 0 0;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+    outline: none;
+}
+
+.tab.active,
+.tab:focus {
+    background: #e9f2ff;
+    color: #0056b3;
+    outline: 3px solid #80bdff;
+    outline-offset: 2px;
+}
+
+.auth-panel {
+    display: block;
+    animation: fadeIn 0.3s;
+}
+
+[hidden].auth-panel {
+    display: none;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}

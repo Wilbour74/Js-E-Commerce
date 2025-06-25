@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexion - E-Commerce</title>
+    <link rel="stylesheet" href="style/auth.css">
+</head>
+<body>
+    <main>
+        <header>
+            <h1>Connexion</h1>
+        </header>
+        <form id="loginForm" aria-label="Formulaire de connexion" autocomplete="on">
+            <div class="form-group">
+                <label for="email">Adresse email</label>
+                <input type="email" id="email" name="email" placeholder="exemple@mail.com" required autocomplete="email" />
+            </div>
+            <div class="form-group">
+                <label for="password">Mot de passe</label>
+                <input type="password" id="password" name="password" placeholder="Mot de passe" required autocomplete="current-password" />
+            </div>
+            <button type="submit">Se connecter</button>
+        </form>
+    </main>
+    <script type="module" src="Scripts/login.js"></script>
+</body>
+</html>
