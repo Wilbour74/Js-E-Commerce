@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     btnGroup.appendChild(logoutBtn);
     topBar.appendChild(btnGroup);
 
-    // Promo bar
+    // Gestion promotion
     let promoActive = false;
     let promoCode = "ESGI10";
     let promoValue = 0.1;
@@ -73,6 +73,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const container = document.getElementById("panier-list");
 
+    // Fonction pour afficher les éléments de notre panier
     async function renderPanier() {
         try {
             const produitsDetails = await userPanier.fetchProduitsDetails();
@@ -109,6 +110,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                 container.appendChild(itemDiv);
             });
 
+            // Affichage des cards et des boutons
             const totalDiv = document.createElement("div");
             totalDiv.classList.add("panier-total");
             let totalFinal = totalGeneral;
@@ -139,6 +141,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
     }
 
+    // Supprimer les produits d'un panier
     container.addEventListener("click", (e) => {
         const target = e.target;
 

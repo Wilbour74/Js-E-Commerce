@@ -27,6 +27,21 @@ document.addEventListener('DOMContentLoaded', function () {
         showPanel(registerPanel, tabRegister);
     });
 
+    // Message d'erreur pour la connexion
+    let loginError = document.createElement('div');
+    loginError.id = 'login-error';
+    loginError.style.color = '#e53935';
+    loginError.style.fontWeight = '600';
+    loginError.style.margin = '0.5em 0 0.5em 0';
+    loginPanel.insertBefore(loginError, loginPanel.querySelector('form').nextSibling);
+
+    // Message d'erreur pour l'inscription
+    let registerError = document.createElement('div');
+    registerError.id = 'register-error';
+    registerError.style.color = '#e53935';
+    registerError.style.fontWeight = '600';
+    registerError.style.margin = '0.5em 0 0.5em 0';
+    registerPanel.insertBefore(registerError, registerPanel.querySelector('form').nextSibling);
 
     // Gestion du formulaire de connexion
     const loginForm = document.getElementById("loginForm");
@@ -35,9 +50,13 @@ document.addEventListener('DOMContentLoaded', function () {
         const email = document.getElementById("login-email").value;
         const password = document.getElementById("login-password").value;
         const message = await User.login(email, password);
-        window.history.replaceState(null, '', 'products.html');
-        location.reload();
-        loginForm.reset();
+        if (message.startsWith("Connexion réussie")) {
+            window.history.replaceState(null, '', 'products.html');
+            location.reload();
+            loginForm.reset();
+        } else {
+            loginError.textContent = message;
+        }
     });
 
     // Gestion du formulaire d'inscription
@@ -48,10 +67,33 @@ document.addEventListener('DOMContentLoaded', function () {
         const pseudo = document.getElementById("register-pseudo").value;
         const email = document.getElementById("register-email").value;
         const password = document.getElementById("register-password").value;
+        const password2 = document.getElementById("register-password2").value;
+        // Vérification email
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            registerError.textContent = "L'adresse email n'est pas valide.";
+            return;
+        }
+        // Vérification robustesse du mot de passe
+        const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+        if (!passwordRegex.test(password)) {
+            registerError.textContent = "Le mot de passe doit contenir au moins 8 caractères, une lettre et un chiffre.";
+            return;
+        }
+        if (password !== password2) {
+            registerError.textContent = "Les mots de passe ne correspondent pas.";
+            return;
+        } else {
+            registerError.textContent = "";
+        }
         const newUser = new User(name, pseudo, email, password);
         const message = await newUser.register();
-        window.history.replaceState(null, '', 'products.html');
-        location.reload();
-        registerForm.reset();
+        if (message.startsWith("Inscription validée")) {
+            window.history.replaceState(null, '', 'products.html');
+            location.reload();
+            registerForm.reset();
+        } else {
+            registerError.textContent = message;
+        }
     });
 }); 

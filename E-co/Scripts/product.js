@@ -4,7 +4,7 @@ import { User } from "../Objects/User.js";
 document.addEventListener("DOMContentLoaded", () => {
     const currentUser = User.load();
     const topBar = document.getElementById("top-bar");
-
+    // Recupération des produits
     fetch("../Data/products.json")
         .then(response => {
             if (!response.ok) throw new Error("Erreur de chargement du fichier JSON.");
@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 } else {
                     stockBadge = `<span class='stock-badge stock-green'>En stock</span>`;
                 }
-
+                // Création des cards
                 card.innerHTML = `
                     <img src="../Assets/${produit.image}" alt="${produit.nom}" class="panier-img">
                     <h3>${produit.nom}</h3>
@@ -51,8 +51,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 container.appendChild(card);
             });
-
+            // Si on est connecté
             if (currentUser) {
+                // Ajouter au panier
                 container.addEventListener("click", (event) => {
                     if (event.target.classList.contains("add-to-cart")) {
                         const button = event.target;
@@ -67,6 +68,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     if (event.target.classList.contains("fav-btn")) {
                         const btn = event.target;
                         const productId = parseInt(btn.dataset.id);
+                        // Mettre ou supprimer l'étoile
                         const message = User.toggleFavori(productId);
 
                         if (btn.textContent.trim().startsWith("☆")) {
@@ -105,7 +107,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 btnGroup.appendChild(panierBtn);
                 btnGroup.appendChild(logoutBtn);
                 topBar.appendChild(btnGroup);
-            } else{
+            } 
+            // Sinon afficher un  bouton d'authentification
+            else{
                 const authBtn = document.createElement("button");
                 authBtn.textContent = `Authentification`;
                 authBtn.id = "auth-btn";
