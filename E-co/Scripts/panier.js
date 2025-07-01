@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
 
     const logoutBtn = document.createElement("button");
-    logoutBtn.textContent = `Déconnexion (${currentUser.pseudo})`;
+    logoutBtn.textContent = `Déconnexion`;
     logoutBtn.className = "topbar-btn logout";
     logoutBtn.addEventListener("click", () => {
         User.logout();
@@ -100,7 +100,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                     <p class="panier-price">Prix unitaire : ${prixUnitaire.toFixed(2)} €</p>
                     <p>
                         Quantité : 
-                        <input type="number" min="1" value="${quantity}" class="qty-input">
+                        <input type="number" min="1" value="${quantity}" max="${produit.stock}" class="qty-input">
                         <button class="update-qty-btn panier-btn">Modifier</button>
                     </p>
                     <p class="panier-total-produit">Total : ${totalProduit.toFixed(2)} €</p>

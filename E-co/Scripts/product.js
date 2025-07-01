@@ -87,7 +87,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 btnGroup.style.margin = "0 1rem 0 0";
 
                 const logoutBtn = document.createElement("button");
-                logoutBtn.textContent = `Déconnexion (${currentUser.pseudo})`;
+                logoutBtn.textContent = `Déconnexion`;
                 logoutBtn.id = "logout-btn";
                 logoutBtn.className = "topbar-btn logout";
                 logoutBtn.addEventListener("click", () => {
