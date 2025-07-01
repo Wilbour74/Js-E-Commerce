@@ -80,11 +80,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 });
 
                 // Création d'un conteneur pour les boutons de la top-bar
-                const btnGroup = document.createElement("div");
-                btnGroup.style.display = "flex";
-                btnGroup.style.justifyContent = "flex-end";
-                btnGroup.style.gap = "1rem";
-                btnGroup.style.margin = "0 1rem 0 0";
+                const btnGroup = document.createElement("div");;
 
                 const logoutBtn = document.createElement("button");
                 logoutBtn.textContent = `Déconnexion`;
