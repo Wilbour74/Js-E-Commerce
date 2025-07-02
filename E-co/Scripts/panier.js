@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 	// Gestion promotion
 	let promoActive = false;
 	let promoCode = "ESGI10";
-	let promoValue = 0.1;
+	let promoValue = 10;
 	const promoBar = document.getElementById("promo-bar");
 	promoBar.innerHTML = `
         <form id="promo-form" style="margin:2rem auto 0 auto;max-width:350px;display:flex;gap:0.5rem;justify-content:center;">
@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 				promoMsg.style.color = "#ffc107";
 			} else {
 				promoActive = true;
-				promoMsg.textContent = "Code promo appliqué : -10%";
+				promoMsg.textContent = "Code promo appliqué : -10€";
 				promoMsg.style.color = "#43a047";
 				renderPanier();
 			}
@@ -109,18 +109,25 @@ document.addEventListener("DOMContentLoaded", async () => {
 				container.appendChild(itemDiv);
 			});
 
-			// Affichage des cards et des boutons
 			const totalDiv = document.createElement("div");
 			totalDiv.classList.add("panier-total");
 			let totalFinal = totalGeneral;
 			let reducMsg = "";
-			if (promoActive) {
-				totalFinal = totalGeneral * (1 - promoValue);
-				reducMsg = `<span class="promo-applied">(Réduction -10%)</span>`;
-			} else if (totalGeneral > 100) {
+			
+			if (totalGeneral > 100) {
 				totalFinal = totalGeneral * 0.9;
 				reducMsg = `<span class="promo-applied">(Réduction automatique -10%)</span>`;
 			}
+			
+			if (promoActive) {
+				totalFinal = Math.max(0, totalFinal - promoValue);
+				if (reducMsg) {
+					reducMsg = `<span class="promo-applied">(Réduction -10% + Code promo -10€)</span>`;
+				} else {
+					reducMsg = `<span class="promo-applied">(Code promo -10€)</span>`;
+				}
+			}
+			
 			totalDiv.innerHTML = `<h3>Total général : ${totalFinal.toFixed(2)} € ${reducMsg}</h3>`;
 			container.appendChild(totalDiv);
 
