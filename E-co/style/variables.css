@@ -1,0 +1,85 @@
+:root {
+    --primary-color: #007bff;
+    --primary-hover: #0056b3;
+    --primary-light: #80bdff;
+    --primary-bg: #e9f2ff;
+    
+    --success-color: #28a745;
+    --success-hover: #1e7e34;
+    --success-light: #b9f6ca;
+    
+    --warning-color: #ffc107;
+    --warning-hover: #ffb300;
+    --warning-light: #ffe082;
+    
+    --danger-color: #e53935;
+    --danger-hover: #b71c1c;
+    --danger-light: #ffbdbd;
+    
+    --text-primary: #222;
+    --text-secondary: #666;
+    --text-muted: #888;
+    
+    --background-primary: #ffffff;
+    --background-secondary: #f7f7f7;
+    --background-gradient: linear-gradient(135deg, #ece9e6 0%, #ffffff 100%);
+    
+    --border-color: #ccc;
+    --border-focus: var(--primary-color);
+    
+    --spacing-xs: 0.25rem;
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 1.5rem;
+    --spacing-xl: 2rem;
+    --spacing-xxl: 3rem;
+    
+    --font-family: 'Segoe UI', Arial, sans-serif;
+    --font-size-xs: 0.85rem;
+    --font-size-sm: 0.9rem;
+    --font-size-base: 1rem;
+    --font-size-lg: 1.1rem;
+    --font-size-xl: 1.2rem;
+    --font-size-xxl: 1.5rem;
+    --font-size-h1: 2.2rem;
+    --font-size-h2: 1.8rem;
+    --font-size-h3: 1.5rem;
+    
+    --font-weight-normal: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+    
+    --border-radius-sm: 6px;
+    --border-radius-md: 8px;
+    --border-radius-lg: 16px;
+    --border-radius-xl: 20px;
+    --border-radius-round: 50%;
+    
+    --shadow-sm: 0 2px 8px rgba(0,0,0,0.07);
+    --shadow-md: 0 4px 24px rgba(0,0,0,0.08);
+    --shadow-lg: 0 8px 32px rgba(0,123,255,0.13);
+    --shadow-button: 0 2px 8px rgba(0,123,255,0.08);
+    --shadow-button-hover: 0 4px 16px rgba(0,86,179,0.12);
+    
+    --transition-fast: 0.18s;
+    --transition-normal: 0.2s;
+    --transition-slow: 0.3s;
+    
+    --z-navbar: 100;
+    --z-modal: 1000;
+    --z-tooltip: 1100;
+    
+    --navbar-height: 5rem;
+    --container-max-width: 1200px;
+    --form-max-width: 400px;
+    --card-max-width: 600px;
+}
+
+:root {
+    --breakpoint-xs: 320px;
+    --breakpoint-sm: 480px;
+    --breakpoint-md: 768px;
+    --breakpoint-lg: 1024px;
+    --breakpoint-xl: 1200px;
+}

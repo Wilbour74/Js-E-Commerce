@@ -3,38 +3,12 @@ body {
     font-family: 'Segoe UI', Arial, sans-serif;
     margin: 0;
     color: #222;
-    padding-top: 5rem; /* Ajoute un espace égal à la hauteur de la navBar */
+    padding-top: 5rem;
 }
 
-.navBar{
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 5rem;
-    margin-bottom: 1.5rem;
-    background-color: rgb(255, 255, 255);
-    box-shadow: 1px 0 8px rgba(0,0,0,0.05);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    z-index: 100;
-    padding: 0 20px 0 20px;
-}
 .homeImage{
     width: 50px;
     height: 50px;
-}
-#top-bar {
-   display: flex;
-   align-items: center; 
-}
-#top-bar div {
-    width: 20rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 1rem;
 }
 
 h1 {
@@ -157,7 +131,21 @@ h1 {
     color: #111;
 }
 
-@media (max-width: 700px) {
+@media (max-width: 1024px) and (min-width: 769px) {
+    #product-list {
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 1.5rem;
+        padding: 1.5rem;
+    }
+    .product {
+        padding: 1.3rem 0.8rem 1.1rem 0.8rem;
+    }
+    h1 {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
     #product-list {
         grid-template-columns: 1fr;
         padding: 1rem;
@@ -167,7 +155,30 @@ h1 {
         padding: 1.2rem 0.5rem 1rem 0.5rem;
     }
     h1 {
+        font-size: 1.5rem;
+    }
+    #top-bar {
+        padding: 0 1rem;
+    }
+    .navbar-actions {
+        gap: 0.5rem;
+    }
+    .topbar-btn {
+        padding: 0.5em 1em;
+        font-size: 0.9em;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
         font-size: 1.3rem;
+    }
+    .product {
+        padding: 1rem 0.3rem 0.8rem 0.3rem;
+    }
+    .topbar-btn {
+        padding: 0.4em 0.8em;
+        font-size: 0.85em;
     }
 }
 
@@ -247,16 +258,23 @@ h1 {
             border-top: 1px solid #444;
             padding-top: 0.7rem;
         }
-        @media (max-width: 700px) {
+        @media (max-width: 768px) {
             .footer-content {
                 flex-direction: column;
                 align-items: center;
                 gap: 1.2rem;
+                padding: 0 1rem;
             }
             .footer-section {
                 min-width: 0;
                 width: 100%;
                 text-align: center;
+            }
+            .footer-section h3 {
+                margin-bottom: 0.5rem;
+            }
+            .footer-section ul li {
+                margin-bottom: 0.3rem;
             }
         }
 .panier-badge {
@@ -301,7 +319,4 @@ h1 {
     display: flex;
     gap: 1rem;
     align-items: center;
-}
-body {
-    padding-top: 5rem;
 }
