@@ -27,13 +27,25 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 	promoForm.addEventListener("submit", (e) => {
 		e.preventDefault();
-		if (promoInput.value.trim().toUpperCase() === promoCode) {
-			promoActive = true;
-			promoMsg.textContent = "Code promo appliqué : -10%";
-			renderPanier();
+		const inputCode = promoInput.value.trim().toUpperCase();
+		
+		if (inputCode === promoCode) {
+			if (promoActive) {
+				promoMsg.textContent = "Code promo déjà appliqué !";
+				promoMsg.style.color = "#ffc107";
+			} else {
+				promoActive = true;
+				promoMsg.textContent = "Code promo appliqué : -10%";
+				promoMsg.style.color = "#43a047";
+				renderPanier();
+			}
+		} else if (inputCode === "") {
+			promoMsg.textContent = "Veuillez saisir un code promo.";
+			promoMsg.style.color = "#e53935";
 		} else {
 			promoActive = false;
 			promoMsg.textContent = "Code promo invalide.";
+			promoMsg.style.color = "#e53935";
 			renderPanier();
 		}
 	});
@@ -52,6 +64,19 @@ document.addEventListener("DOMContentLoaded", async () => {
 		try {
 			const produitsDetails = await userPanier.fetchProduitsDetails();
 			container.innerHTML = "";
+
+			// Vérifier si le panier est vide
+			if (produitsDetails.length === 0) {
+				container.innerHTML = `
+					<div class="panier-vide">
+						<div class="panier-vide-icon">🛒</div>
+						<h2>Votre panier est vide</h2>
+						<p>Découvrez nos produits et ajoutez-les à votre panier pour commencer vos achats.</p>
+						<a href="products.html" class="panier-btn continuer-achats">Continuer mes achats</a>
+					</div>
+				`;
+				return;
+			}
 
 			let totalGeneral = 0;
 

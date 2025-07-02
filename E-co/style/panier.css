@@ -167,6 +167,57 @@ h1 {
     margin: 0 auto 1.5rem auto;
 }
 
+.panier-vide {
+    text-align: center;
+    padding: 3rem 2rem;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    margin: 2rem auto;
+    max-width: 500px;
+}
+
+.panier-vide-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    opacity: 0.7;
+}
+
+.panier-vide h2 {
+    color: #666;
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.panier-vide p {
+    color: #888;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+}
+
+.continuer-achats {
+    display: inline-block;
+    text-decoration: none;
+    background: #007bff;
+    color: #fff;
+    padding: 0.8em 2em;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: background 0.18s, box-shadow 0.18s, transform 0.18s;
+    box-shadow: 0 2px 8px rgba(0,123,255,0.08);
+}
+
+.continuer-achats:hover, .continuer-achats:focus {
+    background: #0056b3;
+    box-shadow: 0 4px 16px rgba(0,86,179,0.12);
+    transform: translateY(-2px);
+    outline: 3px solid #80bdff;
+    outline-offset: 2px;
+}
+
 @media (max-width: 700px) {
     #panier-list {
         padding: 0.5rem;
@@ -177,4 +228,17 @@ h1 {
     h1 {
         font-size: 1.3rem;
     }
-} 
+    .panier-vide {
+        padding: 2rem 1rem;
+        margin: 1rem;
+    }
+    .panier-vide-icon {
+        font-size: 3rem;
+    }
+    .panier-vide h2 {
+        font-size: 1.5rem;
+    }
+    .panier-vide p {
+        font-size: 1rem;
+    }
+}
