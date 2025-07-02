@@ -13,19 +13,30 @@ document.addEventListener("DOMContentLoaded", async () => {
 	let promoCode = "ESGI10";
 	let promoValue = 10;
 	const promoBar = document.getElementById("promo-bar");
+	const cartSummary = document.getElementById("cart-summary");
+	const validateBtn = document.getElementById("validate-order-btn");
+	
 	promoBar.innerHTML = `
-        <form id="promo-form" style="margin:2rem auto 0 auto;max-width:350px;display:flex;gap:0.5rem;justify-content:center;">
-            <input type="text" id="promo-input" placeholder="Code promo" style="flex:1;padding:0.6em 1em;border-radius:8px;border:1.5px solid #ccc;font-size:1em;">
-            <button type="submit" class="topbar-btn promo">Valider</button>
-        </form>
+        <h3>Code Promo</h3>
+        <div class="promo-input-group">
+            <input type="text" id="promo-input" placeholder="Code promo" class="promo-input">
+            <button type="button" id="promo-submit" class="promo-btn">Valider</button>
+        </div>
         <div id="promo-message" style="text-align:center;margin-top:0.5rem;color:#007bff;font-weight:600;"></div>
     `;
+	
+	cartSummary.innerHTML = `
+        <h3>Résumé de la commande</h3>
+        <div id="summary-content">
+            <p>Votre panier est vide</p>
+        </div>
+    `;
 
-	const promoForm = document.getElementById("promo-form");
 	const promoInput = document.getElementById("promo-input");
+	const promoSubmit = document.getElementById("promo-submit");
 	const promoMsg = document.getElementById("promo-message");
 
-	promoForm.addEventListener("submit", (e) => {
+	promoSubmit.addEventListener("click", (e) => {
 		e.preventDefault();
 		const inputCode = promoInput.value.trim().toUpperCase();
 		
@@ -48,6 +59,90 @@ document.addEventListener("DOMContentLoaded", async () => {
 			promoMsg.style.color = "#e53935";
 			renderPanier();
 		}
+	});
+
+	// Function to update cart summary
+	function updateCartSummary() {
+		const summaryContent = document.getElementById("summary-content");
+		const panierData = userPanier.produit;
+		
+		if (panierData.length === 0) {
+			summaryContent.innerHTML = `<p>Votre panier est vide</p>`;
+			validateBtn.disabled = true;
+			return;
+		}
+
+		// Calculate totals (simplified version for summary)
+		let totalGeneral = 0;
+		panierData.forEach(item => {
+			// This is a simplified calculation - in real app you'd fetch product details
+			totalGeneral += item.quantity * 50; // Assuming average price for summary
+		});
+
+		let totalFinal = totalGeneral;
+		let discountText = "";
+		
+		if (totalGeneral > 100) {
+			totalFinal = totalGeneral * 0.9;
+			discountText += "<br><small>Réduction automatique -10%</small>";
+		}
+		
+		if (promoActive) {
+			totalFinal = Math.max(0, totalFinal - promoValue);
+			discountText += "<br><small>Code promo -10€</small>";
+		}
+		
+		summaryContent.innerHTML = `
+			<p><strong>Articles: ${panierData.length}</strong></p>
+			<p>Sous-total: ${totalGeneral.toFixed(2)} €</p>
+			<p><strong>Total: ${totalFinal.toFixed(2)} €</strong></p>
+			${discountText}
+		`;
+		
+		validateBtn.disabled = false;
+	}
+
+	function updateCartSummaryWithRealData(produitsDetails, totalGeneral) {
+		const summaryContent = document.getElementById("summary-content");
+		
+		if (produitsDetails.length === 0) {
+			summaryContent.innerHTML = `<p>Votre panier est vide</p>`;
+			validateBtn.disabled = true;
+			return;
+		}
+
+		let totalFinal = totalGeneral;
+		let discountText = "";
+		
+		if (totalGeneral > 100) {
+			totalFinal = totalGeneral * 0.9;
+			discountText += "<br><small style='color: #43a047;'>Réduction automatique -10%</small>";
+		}
+		
+		if (promoActive) {
+			totalFinal = Math.max(0, totalFinal - promoValue);
+			discountText += "<br><small style='color: #43a047;'>Code promo -10€</small>";
+		}
+		
+		summaryContent.innerHTML = `
+			<p><strong>Articles: ${produitsDetails.length}</strong></p>
+			<p>Sous-total: ${totalGeneral.toFixed(2)} €</p>
+			<p><strong>Total: ${totalFinal.toFixed(2)} €</strong></p>
+			${discountText}
+		`;
+		
+		validateBtn.disabled = false;
+	}
+
+	validateBtn.addEventListener("click", () => {
+		if (userPanier.produit.length === 0) {
+			alert("Votre panier est vide !");
+			return;
+		}
+		userPanier.clear();
+		if (window.updatePanierBadge) window.updatePanierBadge();
+		alert("Commande validée, merci !");
+		window.location.href = "products.html";
 	});
 
 	const userEmail = currentUser.email;
@@ -99,7 +194,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                     <p class="panier-price">Prix unitaire : ${prixUnitaire.toFixed(2)} €</p>
                     <p>
                         Quantité : 
-                        <input type="number" min="1" value="${quantity}" max="${produit.stock}" class="qty-input">
+                        <input type="number" min="1" value="${quantity}" max="${produit.stock}" class="qty-input" data-product-id="${produit.id}">
                         <button class="update-qty-btn panier-btn">Modifier</button>
                     </p>
                     <p class="panier-total-produit">Total : ${totalProduit.toFixed(2)} €</p>
@@ -109,48 +204,19 @@ document.addEventListener("DOMContentLoaded", async () => {
 				container.appendChild(itemDiv);
 			});
 
-			const totalDiv = document.createElement("div");
-			totalDiv.classList.add("panier-total");
-			let totalFinal = totalGeneral;
-			let reducMsg = "";
-			
-			if (totalGeneral > 100) {
-				totalFinal = totalGeneral * 0.9;
-				reducMsg = `<span class="promo-applied">(Réduction automatique -10%)</span>`;
-			}
-			
-			if (promoActive) {
-				totalFinal = Math.max(0, totalFinal - promoValue);
-				if (reducMsg) {
-					reducMsg = `<span class="promo-applied">(Réduction -10% + Code promo -10€)</span>`;
-				} else {
-					reducMsg = `<span class="promo-applied">(Code promo -10€)</span>`;
-				}
-			}
-			
-			totalDiv.innerHTML = `<h3>Total général : ${totalFinal.toFixed(2)} € ${reducMsg}</h3>`;
-			container.appendChild(totalDiv);
-
-			const validerBtn = document.createElement("button");
-			validerBtn.textContent = "Valider la commande";
-			validerBtn.className = "panier-btn valider";
-			container.appendChild(validerBtn);
-
-			validerBtn.addEventListener("click", () => {
-				userPanier.clear();
-				if (window.updatePanierBadge) window.updatePanierBadge();
-				alert("Commande validée, merci !");
-				window.location.href = "products.html";
-			});
+			updateCartSummaryWithRealData(produitsDetails, totalGeneral);
 
 		} catch (error) {
 			console.error("Erreur lors de la récupération des produits :", error);
 		}
 
+		if (produitsDetails.length === 0) {
+			updateCartSummary();
+		}
+
 		if (window.updatePanierBadge) window.updatePanierBadge();
 	}
 
-	// Supprimer les produits d'un panier
 	container.addEventListener("click", async (e) => {
 		const target = e.target;
 
@@ -180,6 +246,24 @@ document.addEventListener("DOMContentLoaded", async () => {
                 alert("Veuillez entrer une quantité valide (>=1).");
             }
         }
+	});
+
+	container.addEventListener("input", async (e) => {
+		if (e.target.classList.contains("qty-input")) {
+			const productId = parseInt(e.target.dataset.productId);
+			const newQty = parseInt(e.target.value);
+			
+			if (newQty && newQty > 0) {
+				try {
+					await userPanier.quantity(productId, newQty);
+					renderPanier();
+					if (window.updatePanierBadge) window.updatePanierBadge();
+				} catch (error) {
+					console.error("Error updating quantity:", error);
+					renderPanier();
+				}
+			}
+		}
 	});
 
 	await renderPanier();

@@ -12,8 +12,23 @@
 <body>
     <div id="top-bar"></div>
     <h1>Mon Panier</h1>
-    <div id="panier-list"></div>
-    <div id="promo-bar"></div>
+    
+    <div class="cart-container">
+        <div class="cart-items-section">
+            <div id="panier-list"></div>
+        </div>
+        
+        <div class="cart-actions-section">
+            <div id="cart-summary"></div>
+            <div id="promo-bar"></div>
+            <div id="validate-section">
+                <button id="validate-order-btn" class="validate-order" disabled>
+                    Valider la commande
+                </button>
+            </div>
+        </div>
+    </div>
+    
     <script type="module" src="Scripts/panier.js"></script>
     <script src="Scripts/navbar.js"></script>
 </body>
