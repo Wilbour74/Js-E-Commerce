@@ -1,21 +1,21 @@
 export class Panier {
     produit;
-    pseudo;
+    userEmail;
 
-    constructor(pseudo) {
-        this.pseudo = pseudo;
+    constructor(userEmail) {
+        this.userEmail = userEmail;
         this.produit = [];
     }
 
-    static load(pseudo) {
-        const data = JSON.parse(localStorage.getItem(`panier_${pseudo}`) || "[]");
-        const panier = new Panier(pseudo);
+    static load(userEmail) {
+        const data = JSON.parse(localStorage.getItem(`panier_${userEmail}`) || "[]");
+        const panier = new Panier(userEmail);
         panier.produit = data;
         return panier;
     }
 
     save() {
-        localStorage.setItem(`panier_${this.pseudo}`, JSON.stringify(this.produit));
+        localStorage.setItem(`panier_${this.userEmail}`, JSON.stringify(this.produit));
     }
 
     addProduct(productId, quantity = 1) {

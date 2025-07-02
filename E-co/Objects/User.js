@@ -1,15 +1,15 @@
 import { Panier } from "./Panier.js";
 
 export class User {
-    name;
-    pseudo;
+    prenom;
+    nom;
     email;
     password;
     favoris;
 
-    constructor(Name, Pseudo, Email, Password) {
-        this.name = Name;
-        this.pseudo = Pseudo;
+    constructor(Prenom, Nom, Email, Password) {
+        this.prenom = Prenom;
+        this.nom = Nom;
         this.email = Email;
         this.password = Password;
         this.favoris = [];
@@ -31,9 +31,9 @@ export class User {
         users.push(this);
         localStorage.setItem("users", JSON.stringify(users));
         localStorage.setItem("currentUser", JSON.stringify({ email: this.email }));
-        const panier = new Panier(this.pseudo);
-        localStorage.setItem(`panier_${this.pseudo}`, JSON.stringify(panier.produit));
-        return `Inscription validée ${this.name}`;
+        const panier = new Panier(this.email);
+        localStorage.setItem(`panier_${this.email}`, JSON.stringify(panier.produit));
+        return `Inscription validée ${this.prenom}`;
     }
 
     static async login(email, password) {
@@ -42,7 +42,7 @@ export class User {
         const foundUser = users.find(user => user.email === email && user.password === hashed);
         if (foundUser) {
             localStorage.setItem("currentUser", JSON.stringify({ email: foundUser.email }));
-            return `Connexion réussie, bienvenue ${foundUser.name}`;
+            return `Connexion réussie, bienvenue ${foundUser.prenom}`;
         } else {
             return "Email ou mot de passe incorrect.";
         }

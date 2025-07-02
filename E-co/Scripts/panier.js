@@ -38,9 +38,9 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
     });
 
-    const pseudo = currentUser.pseudo;
-    const panierData = JSON.parse(localStorage.getItem(`panier_${pseudo}`)) || [];
-    const userPanier = new Panier(pseudo);
+    const userEmail = currentUser.email;
+    const panierData = JSON.parse(localStorage.getItem(`panier_${userEmail}`)) || [];
+    const userPanier = new Panier(userEmail);
     userPanier.produit = panierData;
 
     if (window.updatePanierBadge) window.updatePanierBadge();
@@ -147,14 +147,3 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     await renderPanier();
 });
-
-// If you want to keep this as a standalone function, use the following syntax:
-function addProduct(panierInstance, id, quantity) {
-    const index = panierInstance.produit.findIndex(item => item.id === id);
-    if (index !== -1) {
-        panierInstance.produit[index].quantity += quantity;
-    } else {
-        panierInstance.produit.push({ id, quantity });
-    }
-    localStorage.setItem(`panier_${panierInstance.pseudo}`, JSON.stringify(panierInstance.produit));
-}

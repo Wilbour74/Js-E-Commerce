@@ -53,10 +53,9 @@ document.addEventListener('DOMContentLoaded', function () {
         if (message.startsWith("Connexion réussie")) {
             const user = User.getByEmail(email);
             if (user) {
-                // Ajoute le champ name si présent, sinon valeur par défaut
                 localStorage.setItem("currentUser", JSON.stringify({
-                    name: user.name || "",
-                    pseudo: user.pseudo,
+                    prenom: user.prenom,
+                    nom: user.nom,
                     email: user.email
                 }));
             }
@@ -72,8 +71,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const registerForm = document.getElementById("registerForm");
     registerForm.addEventListener("submit", async (event) => {
         event.preventDefault();
-        const name = document.getElementById("register-name").value;
-        const pseudo = document.getElementById("register-pseudo").value;
+        const prenom = document.getElementById("register-prenom").value;
+        const nom = document.getElementById("register-nom").value;
         const email = document.getElementById("register-email").value;
         const password = document.getElementById("register-password").value;
         const password2 = document.getElementById("register-password2").value;
@@ -95,12 +94,12 @@ document.addEventListener('DOMContentLoaded', function () {
         } else {
             registerError.textContent = "";
         }
-        const newUser = new User(name, pseudo, email, password);
+        const newUser = new User(prenom, nom, email, password);
         const message = await newUser.register();
         if (message.startsWith("Inscription validée")) {
             localStorage.setItem("currentUser", JSON.stringify({
-                name: name,
-                pseudo: pseudo,
+                prenom: prenom,
+                nom: nom,
                 email: email
             }));
             window.history.replaceState(null, '', 'products.html');

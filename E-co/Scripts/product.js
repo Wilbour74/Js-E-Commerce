@@ -60,7 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         const productId = parseInt(button.dataset.id);
                         const qtyInput = button.previousElementSibling;
                         const quantity = parseInt(qtyInput.value) || 1;
-                        const panier = Panier.load(currentUser.pseudo);
+                        const panier = Panier.load(currentUser.email);
                         panier.addProduct(productId, quantity);
 
                         alert("Produit ajouté au panier !");
