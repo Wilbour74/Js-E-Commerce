@@ -470,6 +470,10 @@ h1 {
         font-size: 0.9em;
     }
     
+    .cart-items-section {
+        max-height: 50vh;
+    }
+    
     #panier-list {
         padding: 1rem;
         max-width: 95%;
