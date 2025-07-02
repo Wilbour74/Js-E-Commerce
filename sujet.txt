@@ -1,0 +1,86 @@
+Projet : E-commerce
+Créer une application simple de gestion de panier d’un site e-commerce en JavaScript.
+
+Sur ce devoir, vous devez faire du Javascript from scratch, aucun framework ou librairie n’est autorisé.
+
+L’utilisation de classes et localstorage est obligatoire.
+
+Pages et fonctionnalités
+Liste des produits (public)
+Créer une page qui liste des produits avec leur prix et leur quantité disponible.
+
+Il est conseillé de créer un jeu de données pour les produits.
+
+Sur cette page, il doit être possible :
+
+d’ajouter un produit au panier en choisissant la quantité.
+d’ajouter / supprimer un produit en favoris.
+Inscription et connexion (public)
+Si l’utilisateur n’est pas connecté, il doit pouvoir s’inscrire ou se connecter, avant de pouvoir ajouter un produit au panier.
+
+Vous devez lui demander :
+
+son prénom
+son nom
+son email
+son mot de passe
+une confirmation de son mot de passe
+⚠️ Le mot de passe ne doit pas être stocké en clair.
+
+Panier (connecté)
+Créer une page qui liste les produits du panier avec, pour chacun, leur prix et la quantité ajoutée au panier.
+
+Sur cette page, il doit être possible de :
+
+supprimer un produit du panier.
+modifier la quantité d’un produit du panier.
+valider le panier.
+Suite à la validation du panier, vous devez rediriger l’utilisateur vers la page d’accueil, et réinitialiser son panier.
+Il doit également figurer sur la page le prix total du panier.
+
+Réduction (connecté)
+Implémentez une fonctionnalité de réduction :
+
+10% de réduction si le panier dépasse 100€
+10€ en ajoutant le code promo “ESGI10”
+Critères d’évaluation
+Respect des consignes et des fonctionnalités demandées.
+
+Inscription et connexion (4 points).
+Page Produits : Liste des produits, choix de la quantité, ajout au panier (4 points).
+Ajout / suppression d’un produit en favoris (2 points).
+Page Panier : Suppression, modification de la quantité par produit, validation du panier (4 points).
+Réductions (4 points).
+Bonne gestion des cas particuliers (produits en double, quantités invalides, vérification des formulaires, etc.) (4 points).
+Organisation et lisibilité du code (8 points).
+Bonus
+Toute fonctionnalité supplémentaire ET pertinente sera valorisée.
+
+Rendus
+Ce devoir est à réaliser en groupes de 3 maximum et ne peut pas être réalisé seul.
+
+Il est à rendre au plus tard le 02/07/2025 à 23h59.
+
+Vous devrez me partager votre devoir sur Github (identifiant : yoanncoualan) ou m’envoyer le lien de votre repo public par email (yoanncoualan@gmail.com).
+Vous devrez me fournir :
+
+votre code complet,
+votre nom et prénom dans le README.
+Soutenances
+Votre projet sera à présenter à l’oral le 03/07/2025.
+
+Vous aurez 15 minutes de présentation maximum par groupe, suivi de 10 minutes maximum d’échange sur votre projet.
+
+Lors de la présentation, vous devrez :
+
+présenter votre projet (démonstration fonctionnelle),
+présenter les difficultés rencontrées et les solutions apportées,
+présenter les perspectives d’amélioration,
+présenter la répartition du travail et la méthode de gestion de projet,
+présenter des morceaux de code qui vous semblent pertinents.
+Évaluation
+Votre projet sera évalué sur :
+
+la qualité du code (30 points),
+la qualité de la présentation et des échanges (10 points).
+Cette note sera ensuite ramenée sur 20.
