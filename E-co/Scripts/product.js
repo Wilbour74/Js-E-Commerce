@@ -4,7 +4,7 @@ import { User } from "../Objects/User.js";
 document.addEventListener("DOMContentLoaded", () => {
     const currentUser = User.load();
     // Recupération des produits
-    fetch("../Data/products.json")
+    fetch("Data/products.json")
         .then(response => {
             if (!response.ok) throw new Error("Erreur de chargement du fichier JSON.");
             return response.json();
@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
                 // Création des cards
                 card.innerHTML = `
-                    <img src="../Assets/${produit.image}" alt="${produit.nom}" class="panier-img">
+                    <img src="Assets/${produit.image}" alt="${produit.nom}" class="panier-img">
                     <h3>${produit.nom}</h3>
                     <div class="price">${produit.prix.toFixed(2)} €</div>
                     <div>${stockBadge}</div>

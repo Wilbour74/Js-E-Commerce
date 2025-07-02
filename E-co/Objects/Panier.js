@@ -19,7 +19,7 @@ export class Panier {
     }
 
     async addProduct(productId, quantity = 1) {
-        const response = await fetch("../Data/products.json");
+        const response = await fetch("Data/products.json");
         if (!response.ok) throw new Error("Erreur de chargement du fichier JSON.");
         const allProducts = await response.json();
         const product = allProducts.find(p => p.id === productId);
@@ -48,7 +48,7 @@ export class Panier {
         const existing = this.produit.find(p => p.id === productId);
         if (existing) {
             if (quantity > 0) {
-                const response = await fetch("../Data/products.json");
+                const response = await fetch("Data/products.json");
                 if (!response.ok) throw new Error("Erreur de chargement du fichier JSON.");
                 const allProducts = await response.json();
                 const product = allProducts.find(p => p.id === productId);
@@ -80,7 +80,7 @@ export class Panier {
     }
 
     async fetchProduitsDetails() {
-        const response = await fetch("../Data/products.json");
+        const response = await fetch("Data/products.json");
         if (!response.ok) throw new Error("Erreur de chargement du fichier JSON.");
         const allProducts = await response.json();
 

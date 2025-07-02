@@ -69,7 +69,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 				itemDiv.dataset.id = produit.id;
 
 				itemDiv.innerHTML = `
-                    <img src="../Assets/${produit.image}" alt="${produit.nom}" class="panier-img">
+                    <img src="Assets/${produit.image}" alt="${produit.nom}" class="panier-img">
                     <h4>${produit.nom}</h4>
                     <p class="panier-price">Prix unitaire : ${prixUnitaire.toFixed(2)} €</p>
                     <p>
@@ -152,14 +152,3 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 	await renderPanier();
 });
-
-// If you want to keep this as a standalone function, use the following syntax:
-function addProduct(panierInstance, id, quantity) {
-	const index = panierInstance.produit.findIndex(item => item.id === id);
-	if (index !== -1) {
-		panierInstance.produit[index].quantity += quantity;
-	} else {
-		panierInstance.produit.push({ id, quantity });
-	}
-	localStorage.setItem(`panier_${panierInstance.pseudo}`, JSON.stringify(panierInstance.produit));
-}

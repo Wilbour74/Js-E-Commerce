@@ -2,6 +2,7 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mon Compte</title>
     <link rel="stylesheet" href="style/product.css">
 </head>
@@ -25,8 +26,8 @@
             const user = JSON.parse(userStr);
             // Si tu stockes aussi le nom dans currentUser, sinon adapte ici
             userInfoDiv.innerHTML = `
-                <p><strong>Nom :</strong> ${user.name ? user.name : "(non renseigné)"}</p>
-                <p><strong>Pseudo :</strong> ${user.pseudo}</p>
+                <p><strong>Prénom :</strong> ${user.prenom ? user.prenom : "(non renseigné)"}</p>
+                <p><strong>Nom :</strong> ${user.nom ? user.nom : "(non renseigné)"}</p>
                 <p><strong>Email :</strong> ${user.email}</p>
             `;
         });
