@@ -88,4 +88,9 @@ export class User {
         User.save(currentUser);
         return message;
     }
+
+    static getByEmail(email) {
+        const users = JSON.parse(localStorage.getItem("users")) || [];
+        return users.find(u => u.email === email) || null;
+    }
 }

@@ -51,6 +51,15 @@ document.addEventListener('DOMContentLoaded', function () {
         const password = document.getElementById("login-password").value;
         const message = await User.login(email, password);
         if (message.startsWith("Connexion réussie")) {
+            const user = User.getByEmail(email);
+            if (user) {
+                // Ajoute le champ name si présent, sinon valeur par défaut
+                localStorage.setItem("currentUser", JSON.stringify({
+                    name: user.name || "",
+                    pseudo: user.pseudo,
+                    email: user.email
+                }));
+            }
             window.history.replaceState(null, '', 'products.html');
             location.reload();
             loginForm.reset();
@@ -89,6 +98,11 @@ document.addEventListener('DOMContentLoaded', function () {
         const newUser = new User(name, pseudo, email, password);
         const message = await newUser.register();
         if (message.startsWith("Inscription validée")) {
+            localStorage.setItem("currentUser", JSON.stringify({
+                name: name,
+                pseudo: pseudo,
+                email: email
+            }));
             window.history.replaceState(null, '', 'products.html');
             location.reload();
             registerForm.reset();
@@ -96,4 +110,4 @@ document.addEventListener('DOMContentLoaded', function () {
             registerError.textContent = message;
         }
     });
-}); 
+});

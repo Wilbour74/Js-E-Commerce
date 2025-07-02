@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Mon Compte</title>
+    <link rel="stylesheet" href="style/product.css">
+</head>
+<body>
+    <div id="top-bar"></div>
+    <main style="max-width: 500px; margin: 6rem auto 2rem auto; background: #fff; border-radius: 16px; box-shadow: 0 2px 12px rgba(0,0,0,0.07); padding: 2rem;">
+        <h1>Mon Compte</h1>
+        <div id="user-info">
+            <!-- Les infos utilisateur seront injectées ici -->
+        </div>
+    </main>
+    <script src="Scripts/navbar.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const userInfoDiv = document.getElementById("user-info");
+            const userStr = localStorage.getItem("currentUser");
+            if (!userStr) {
+                userInfoDiv.innerHTML = "<p style='color:#e53935;'>Aucun utilisateur connecté.</p>";
+                return;
+            }
+            const user = JSON.parse(userStr);
+            // Si tu stockes aussi le nom dans currentUser, sinon adapte ici
+            userInfoDiv.innerHTML = `
+                <p><strong>Nom :</strong> ${user.name ? user.name : "(non renseigné)"}</p>
+                <p><strong>Pseudo :</strong> ${user.pseudo}</p>
+                <p><strong>Email :</strong> ${user.email}</p>
+            `;
+        });
+    </script>
+</body>
+</html>

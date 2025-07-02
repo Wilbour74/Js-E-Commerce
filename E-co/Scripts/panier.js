@@ -8,34 +8,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         return;
     }
 
-    // Top-bar boutons
-    const topBar = document.getElementById("top-bar");
-    const btnGroup = document.createElement("div");
-    btnGroup.style.display = "flex";
-    btnGroup.style.justifyContent = "flex-end";
-    btnGroup.style.gap = "1rem";
-    btnGroup.style.margin = "0 1rem 0 0";
-
-    const homeBtn = document.createElement("button");
-    homeBtn.textContent = "Home";
-    homeBtn.className = "topbar-btn home";
-    homeBtn.addEventListener("click", () => {
-        window.history.replaceState(null, '', 'products.html');
-        location.reload();
-    });
-
-    const logoutBtn = document.createElement("button");
-    logoutBtn.textContent = `Déconnexion`;
-    logoutBtn.className = "topbar-btn logout";
-    logoutBtn.addEventListener("click", () => {
-        User.logout();
-        window.location.replace("index.html");
-    });
-
-    btnGroup.appendChild(homeBtn);
-    btnGroup.appendChild(logoutBtn);
-    topBar.appendChild(btnGroup);
-
     // Gestion promotion
     let promoActive = false;
     let promoCode = "ESGI10";
@@ -70,6 +42,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     const panierData = JSON.parse(localStorage.getItem(`panier_${pseudo}`)) || [];
     const userPanier = new Panier(pseudo);
     userPanier.produit = panierData;
+
+    if (window.updatePanierBadge) window.updatePanierBadge();
 
     const container = document.getElementById("panier-list");
 
@@ -132,6 +106,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
             validerBtn.addEventListener("click", () => {
                 userPanier.clear();
+                if (window.updatePanierBadge) window.updatePanierBadge();
                 alert("Commande validée, merci !");
                 window.location.href = "products.html";
             });
@@ -139,6 +114,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         } catch (error) {
             console.error("Erreur lors de la récupération des produits :", error);
         }
+
+        if (window.updatePanierBadge) window.updatePanierBadge();
     }
 
     // Supprimer les produits d'un panier
@@ -149,6 +126,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             const productId = parseInt(target.closest(".panier-item").dataset.id);
             userPanier.removeProduct(productId);
             renderPanier();
+            if (window.updatePanierBadge) window.updatePanierBadge();
         }
 
         if (target.classList.contains("update-qty-btn")) {
@@ -160,6 +138,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             if (newQty && newQty > 0) {
                 userPanier.quantity(productId, newQty);
                 renderPanier();
+                if (window.updatePanierBadge) window.updatePanierBadge();
             } else {
                 alert("Veuillez entrer une quantité valide (>=1).");
             }
@@ -168,3 +147,14 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     await renderPanier();
 });
+
+// If you want to keep this as a standalone function, use the following syntax:
+function addProduct(panierInstance, id, quantity) {
+    const index = panierInstance.produit.findIndex(item => item.id === id);
+    if (index !== -1) {
+        panierInstance.produit[index].quantity += quantity;
+    } else {
+        panierInstance.produit.push({ id, quantity });
+    }
+    localStorage.setItem(`panier_${panierInstance.pseudo}`, JSON.stringify(panierInstance.produit));
+}

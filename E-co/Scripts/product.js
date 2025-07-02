@@ -3,7 +3,6 @@ import { User } from "../Objects/User.js";
 
 document.addEventListener("DOMContentLoaded", () => {
     const currentUser = User.load();
-    const topBar = document.getElementById("top-bar");
     // Recupération des produits
     fetch("../Data/products.json")
         .then(response => {
@@ -51,9 +50,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 container.appendChild(card);
             });
-            // Si on est connecté
+
+            // if connected
             if (currentUser) {
-                // Ajouter au panier
+                // add basket
                 container.addEventListener("click", (event) => {
                     if (event.target.classList.contains("add-to-cart")) {
                         const button = event.target;
@@ -64,6 +64,8 @@ document.addEventListener("DOMContentLoaded", () => {
                         panier.addProduct(productId, quantity);
 
                         alert("Produit ajouté au panier !");
+
+                        if (window.updatePanierBadge) window.updatePanierBadge();
                     }
                     if (event.target.classList.contains("fav-btn")) {
                         const btn = event.target;
@@ -78,45 +80,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         }
                     }
                 });
-
-                // Création d'un conteneur pour les boutons de la top-bar
-                const btnGroup = document.createElement("div");;
-
-                const logoutBtn = document.createElement("button");
-                logoutBtn.textContent = `Déconnexion`;
-                logoutBtn.id = "logout-btn";
-                logoutBtn.className = "topbar-btn logout";
-                logoutBtn.addEventListener("click", () => {
-                    User.logout();
-                    location.reload();
-                });
-
-                const panierBtn = document.createElement("button");
-                panierBtn.textContent = `Panier`;
-                panierBtn.id = "panier-btn";
-                panierBtn.className = "topbar-btn panier";
-                panierBtn.addEventListener("click", () => {
-                    window.history.replaceState(null, '', 'panier.html');
-                    location.reload();
-                });
-
-                btnGroup.appendChild(panierBtn);
-                btnGroup.appendChild(logoutBtn);
-                topBar.appendChild(btnGroup);
-            } 
-            // Sinon afficher un  bouton d'authentification
-            else{
-                const authBtn = document.createElement("button");
-                authBtn.textContent = `Authentification`;
-                authBtn.id = "auth-btn";
-                authBtn.className = "topbar-btn home";
-                authBtn.addEventListener("click", () => {
-                    window.history.replaceState(null, '', 'index.html');
-                    location.reload();
-                })
-                topBar.appendChild(authBtn);
             }
-            
         })
         .catch(error => {
             console.error("Erreur :", error);
