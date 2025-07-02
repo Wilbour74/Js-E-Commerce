@@ -54,18 +54,21 @@ document.addEventListener("DOMContentLoaded", () => {
             // if connected
             if (currentUser) {
                 // add basket
-                container.addEventListener("click", (event) => {
+                container.addEventListener("click", async (event) => {
                     if (event.target.classList.contains("add-to-cart")) {
                         const button = event.target;
                         const productId = parseInt(button.dataset.id);
                         const qtyInput = button.previousElementSibling;
                         const quantity = parseInt(qtyInput.value) || 1;
                         const panier = Panier.load(currentUser.email);
-                        panier.addProduct(productId, quantity);
-
-                        alert("Produit ajouté au panier !");
-
-                        if (window.updatePanierBadge) window.updatePanierBadge();
+                        
+                        try {
+                            await panier.addProduct(productId, quantity);
+                            alert("Produit ajouté au panier !");
+                            if (window.updatePanierBadge) window.updatePanierBadge();
+                        } catch (error) {
+                            alert(error.message);
+                        }
                     }
                     if (event.target.classList.contains("fav-btn")) {
                         const btn = event.target;

@@ -32,9 +32,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function updatePanierBadge() {
         let user = JSON.parse(localStorage.getItem("currentUser"));
-        let pseudo = user && user.pseudo ? user.pseudo : null;
-        let panier = pseudo ? JSON.parse(localStorage.getItem(`panier_${pseudo}`)) : [];
-        console.log("navbar.js badge debug", {pseudo, panier});
+        let email = user && user.email ? user.email : null;
+        let panier = email ? JSON.parse(localStorage.getItem(`panier_${email}`)) : [];
+        console.log("navbar.js badge debug", {email, panier});
         let total = panier ? panier.reduce((sum, item) => sum + (item.quantity || 0), 0) : 0;
         const badge = document.getElementById("panier-badge");
         badge.textContent = total;
